@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Wrapper } from './';
 import Link from 'next/link';
 import Menu from './Menu';
@@ -15,6 +15,26 @@ const Header = () => {
   const [showCategoryMenu, setShowCategoryMenu] = useState(false);
   const [show, setShow] = useState('translate-y-0');
   const [lastScrolly, setLastScrolly] = useState(false);
+
+  const controlNavbar = () => {
+    if(window.scrollY > 200) {
+      if(window.scrollY > lastScrolly && !mobileMenu) {
+        setShow('-translate-y-[80px]');
+      } else {
+        setShow('shadow-sm');
+      }
+    } else {
+      setShow('translate-y-0');
+    }
+    setLastScrolly(window.scrollY);
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', controlNavbar);
+    return () => {
+      window.removeEventListener('scroll', controlNavbar);
+    }
+  }, [lastScrolly]);
 
   return (
     <header className={`w-full h[50px] md:h-[80px] bg-white flex items-center justify-between z-20 sticky top-0 transition-transform duration-300 ${show}`}>
