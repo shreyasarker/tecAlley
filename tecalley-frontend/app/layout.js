@@ -1,10 +1,6 @@
-import { Inter, Urbanist } from 'next/font/google';
+import { Urbanist } from 'next/font/google';
 import './globals.css';
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-});
+import { Footer, Header } from '@/components';
 
 const urbanist = Urbanist({
   subsets: ['latin'],
@@ -19,7 +15,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${urbanist.variable} font-sans`} suppressHydrationWarning={true}>{children}</body>
+      <body className={`${urbanist.variable} font-sans`} suppressHydrationWarning={true}>
+        <Header />
+          {children}
+        <Footer />
+      </body>
     </html>
   )
 }
