@@ -1,4 +1,4 @@
-import { Product, Wrapper } from '@/components';
+import { ProductCard, Wrapper } from '@/components';
 
 const Category = ({ params }) => {
   return (
@@ -11,15 +11,15 @@ const Category = ({ params }) => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-4 px-5 md:px-0">
-          <Product />
-          <Product />
-          <Product />
-          <Product />
-          <Product />
-          <Product />
-          <Product />
-          <Product />
-          <Product />
+        <ProductCard />
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
         </div>
       </Wrapper>
     </div>

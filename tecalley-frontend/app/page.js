@@ -1,4 +1,4 @@
-import { Hero, Product, Wrapper } from "@/components";
+import { Hero, ProductCard, Wrapper } from "@/components";
 
 const Home = () => {
   return (
@@ -15,15 +15,15 @@ const Home = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-4 px-5 md:px-0">
-          <Product />
-          <Product />
-          <Product />
-          <Product />
-          <Product />
-          <Product />
-          <Product />
-          <Product />
-          <Product />
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
         </div>
       </Wrapper>
     </main>

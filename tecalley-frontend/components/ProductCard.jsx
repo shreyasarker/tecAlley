@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-const Product = () => {
+const ProductCard = () => {
   return (
     <Link href="/" className="transform overflow-hidden bg-white duration-200 hover:scale-105 cursor-pointer">
       <img className="w-full" src="/assets/products/samsung-s23-ultra/S23U-V2-Configurator-DT-800x600.webp" alt="Product" />
@@ -16,4 +16,4 @@ const Product = () => {
   )
 }
 
-export default Product
+export default ProductCard
