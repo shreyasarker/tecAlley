@@ -1,4 +1,4 @@
-import { RiDeleteBin6Line } from "react-icons/ri";
+import { RiDeleteBin6Line } from 'react-icons/ri';
 
 const CartItem = () => {
   return (
