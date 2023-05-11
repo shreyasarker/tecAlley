@@ -28,7 +28,7 @@ const Product = ({ params }) => {
               {`(Also includes all applicable duties)`}
             </div>
 
-            <button className="w-full py-4 rounded-full bg-black text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75">
+            <button className="w-full py-4 rounded-full bg-indigo-500 text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75">
               Add to Cart
             </button>
 

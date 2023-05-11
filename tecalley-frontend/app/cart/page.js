@@ -36,7 +36,7 @@ const Cart = () => {
               </div>
 
             </div>
-            <button className="w-full py-4 rounded-full bg-black text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75 flex items-center gap-2 justify-center">
+            <button className="w-full py-4 rounded-full bg-indigo-500 text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75 flex items-center gap-2 justify-center">
               Checkout
             </button>
           </div>
@@ -50,7 +50,7 @@ const Cart = () => {
             <br />
             Go ahead and explore top categories.
           </span>
-          <Link href="/" className="py-4 px-8 rounded-full bg-black text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75 mt-8">
+          <Link href="/" className="py-4 px-8 rounded-full bg-indigo-500 text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75 mt-8">
             Continue Shopping
           </Link>
         </div>
