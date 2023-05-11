@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
-import { ProductCard } from ".";
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+import { ProductCard } from './';
 
 const RelatedProducts = () => {
   const responsive = {

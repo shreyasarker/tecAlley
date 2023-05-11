@@ -1,4 +1,4 @@
-import { Hero, ProductCard, Wrapper } from "@/components";
+import { Hero, ProductCard, Wrapper } from '@/components';
 
 const Home = () => {
   return (

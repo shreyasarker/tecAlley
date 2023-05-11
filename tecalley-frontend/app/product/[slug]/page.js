@@ -1,6 +1,6 @@
 import { IoMdHeartEmpty } from 'react-icons/io';
 
-import { ProductCarousel, RelatedProducts, Wrapper } from "@/components"
+import { ProductCarousel, RelatedProducts, Wrapper } from '@/components';
 
 const Product = ({ params }) => {
   return (
