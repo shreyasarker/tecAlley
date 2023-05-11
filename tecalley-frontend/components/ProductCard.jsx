@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 const ProductCard = () => {
   return (
-    <Link href="/" className="transform overflow-hidden bg-white duration-200 hover:scale-105 cursor-pointer">
+    <Link href="/samsung-s23-ultra" className="transform overflow-hidden bg-white duration-200 hover:scale-105 cursor-pointer">
       <img className="w-full" src="/assets/products/samsung-s23-ultra/S23U-V2-Configurator-DT-800x600.webp" alt="Product" />
       <div className="p-4 text-black/[0.9]">
         <h2 className="text-lg font-medium">Samsung S23 Ultra</h2>
