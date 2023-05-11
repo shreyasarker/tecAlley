@@ -4,7 +4,8 @@ import { Footer, Header } from '@/components';
 
 const urbanist = Urbanist({
   subsets: ['latin'],
-  variable: '--font-urbanist',
+  display: 'swap',
+  weight: ['400', '700']
 });
 
 export const metadata = {
@@ -15,7 +16,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${urbanist.variable} font-sans`} suppressHydrationWarning={true}>
+      <body className={urbanist.className} suppressHydrationWarning={true}>
         <Header />
           {children}
         <Footer />
