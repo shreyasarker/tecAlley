@@ -1,5 +1,5 @@
 import React from 'react';
-import { menuData, subMenuData } from '@/utils/data';
+import { menuData } from '@/utils/data';
 import { BsChevronBarDown } from 'react-icons/bs';
 import Link from 'next/link';
 
@@ -17,7 +17,7 @@ const MobileMenu = ({ categories, showCategoryMenu, setShowCategoryMenu, setMobi
               {showCategoryMenu && (
                 <ul className="bg-black/[0.05] -mx-5 mt-4 -mb-4">
                   {categories?.data?.map((category) => (
-                    <Link href="/" key={category.id} onClick={() => {setShowCategoryMenu(false); setMobileMenu(false)}}>
+                    <Link href={`category/${category.attributes.slug}`} key={category.id} onClick={() => {setShowCategoryMenu(false); setMobileMenu(false)}}>
                       <li className="py-4 px-8 border-t flex justify-between">
                         {category.attributes.name}
                         <span className="opacity-50 text-sm">{category.attributes?.products?.data?.length}</span>
