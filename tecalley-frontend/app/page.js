@@ -1,6 +1,9 @@
 import { Hero, ProductCard, Wrapper } from '@/components';
+import { fetchDataFromApi } from '@/utils/api';
 
-const Home = () => {
+const Home = async () => {
+  const products = await fetchDataFromApi('/products?populate=*');
+
   return (
     <main>
       <Hero />
@@ -15,15 +18,9 @@ const Home = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-4 px-5 md:px-0">
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
+        {products?.data?.length && products?.data?.map((product, i) => (
+          <ProductCard key={i} product={product}/>
+          ))}
         </div>
       </Wrapper>
     </main>
