@@ -3,7 +3,7 @@ import { menuData, subMenuData } from '@/utils/data';
 import { BsChevronBarDown } from 'react-icons/bs';
 import Link from 'next/link';
 
-const Menu = ({ showCategoryMenu, setShowCategoryMenu }) => {
+const Menu = ({ categories, showCategoryMenu, setShowCategoryMenu }) => {
   return (
     <ul className="hidden md:flex items-center gap-8 font-medium text-black">
       {menuData.map((item) => (
@@ -14,11 +14,11 @@ const Menu = ({ showCategoryMenu, setShowCategoryMenu }) => {
               <BsChevronBarDown size={14} />
               {showCategoryMenu && (
                 <ul className="bg-white absolute top-6 left-0 min-w-[250px] px-1 py-1 text-black shadow-lg">
-                  {subMenuData.map((subMenuItem) => (
-                    <Link href="/" key={subMenuItem.id} onClick={() => setShowCategoryMenu(false)}>
+                  {categories?.data?.map((category) => (
+                    <Link href="/" key={category.id} onClick={() => setShowCategoryMenu(false)}>
                       <li className="h-12 flex justify-between items-center px-3 hover:bg-black/[0.03] rounded-md">
-                        {subMenuItem.name}
-                        <span className="opacity-50 text-sm">{subMenuItem.docCount}</span>
+                        {category.attributes.name}
+                        <span className="opacity-50 text-sm">{category.attributes?.products?.data?.length}</span>
                       </li>
                     </Link>
                   ))}

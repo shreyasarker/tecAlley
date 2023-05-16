@@ -9,12 +9,20 @@ import { BsCart } from 'react-icons/bs';
 import { BiMenuAltRight } from 'react-icons/bi';
 import { VscChromeClose } from 'react-icons/vsc';
 import MobileMenu from './MobileMenu';
+import { fetchDataFromApi } from '@/utils/api';
 
 const Header = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
   const [showCategoryMenu, setShowCategoryMenu] = useState(false);
   const [show, setShow] = useState('translate-y-0');
   const [lastScrolly, setLastScrolly] = useState(false);
+
+  const [categories, setCategories] = useState([]);
+
+  const fetchCategories = async () => {
+    const data = await fetchDataFromApi('/categories?populate=*');
+    setCategories(data);
+  }
 
   const controlNavbar = () => {
     if(window.scrollY > 200) {
@@ -37,6 +45,10 @@ const Header = () => {
     }
   }, [lastScrolly]);
 
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
   return (
     <header className={`w-full h[50px] md:h-[80px] bg-white flex items-center justify-between z-20 sticky top-0 transition-transform duration-300 ${show}`}>
       <Wrapper className="h-[60px] flex justify-between items-center">
@@ -45,8 +57,8 @@ const Header = () => {
           <img src="/assets/logo.png" className="w-[150px] md:w-[180px]"/>
         </Link>
 
-        <Menu showCategoryMenu={showCategoryMenu} setShowCategoryMenu={setShowCategoryMenu} />
-        {mobileMenu &&  <MobileMenu showCategoryMenu={showCategoryMenu} setShowCategoryMenu={setShowCategoryMenu} setMobileMenu={setMobileMenu} />}
+        <Menu categories={categories} showCategoryMenu={showCategoryMenu} setShowCategoryMenu={setShowCategoryMenu} />
+        {mobileMenu &&  <MobileMenu categories={categories} showCategoryMenu={showCategoryMenu} setShowCategoryMenu={setShowCategoryMenu} setMobileMenu={setMobileMenu} />}
 
         <div className="flex items-center justify-between gap-2 text-black">
           <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex justify-center items-center hover:bg-black/[0.05] cursor-pointer relative">

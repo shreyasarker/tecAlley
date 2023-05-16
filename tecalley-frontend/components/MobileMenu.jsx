@@ -3,7 +3,7 @@ import { menuData, subMenuData } from '@/utils/data';
 import { BsChevronBarDown } from 'react-icons/bs';
 import Link from 'next/link';
 
-const MobileMenu = ({ showCategoryMenu, setShowCategoryMenu, setMobileMenu }) => {
+const MobileMenu = ({ categories, showCategoryMenu, setShowCategoryMenu, setMobileMenu }) => {
   return (
     <ul className="w-full flex flex-col md:hidden font-bold absolute top-[50px] left-0 h-[calc(100vh-50px)] bg-white border-t text-black">
       {menuData.map((item) => (
@@ -16,11 +16,11 @@ const MobileMenu = ({ showCategoryMenu, setShowCategoryMenu, setMobileMenu }) =>
               </div>
               {showCategoryMenu && (
                 <ul className="bg-black/[0.05] -mx-5 mt-4 -mb-4">
-                  {subMenuData.map((subMenuItem) => (
-                    <Link href="/" key={subMenuItem.id} onClick={() => {setShowCategoryMenu(false); setMobileMenu(false)}}>
+                  {categories?.data?.map((category) => (
+                    <Link href="/" key={category.id} onClick={() => {setShowCategoryMenu(false); setMobileMenu(false)}}>
                       <li className="py-4 px-8 border-t flex justify-between">
-                        {subMenuItem.name}
-                        <span className="opacity-50 text-sm">{subMenuItem.docCount}</span>
+                        {category.attributes.name}
+                        <span className="opacity-50 text-sm">{category.attributes?.products?.data?.length}</span>
                       </li>
                     </Link>
                   ))}
