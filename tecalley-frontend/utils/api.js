@@ -13,3 +13,19 @@ export const fetchDataFromApi = async (endpoint) => {
 
   return data;
 }
+
+export const makePaymentRequest = async (endpoint, payload) => {
+  const options = {
+    method: 'post',
+    headers: {
+      Authorization: `Bearer ${STRAPI_API_TOKEN}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  };
+
+  const response = await fetch(`${API_URL}${endpoint}`, options);
+  const data = await response.json();
+
+  return data;
+}
