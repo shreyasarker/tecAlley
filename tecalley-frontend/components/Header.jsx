@@ -10,6 +10,7 @@ import { BiMenuAltRight } from 'react-icons/bi';
 import { VscChromeClose } from 'react-icons/vsc';
 import MobileMenu from './MobileMenu';
 import { fetchDataFromApi } from '@/utils/api';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
@@ -18,6 +19,8 @@ const Header = () => {
   const [lastScrolly, setLastScrolly] = useState(false);
 
   const [categories, setCategories] = useState([]);
+
+  const cartItems = useSelector((state) => state.cart.cartItems.length);
 
   const fetchCategories = async () => {
     const data = await fetchDataFromApi('/categories?populate=*');
@@ -71,9 +74,11 @@ const Header = () => {
           <Link href="/cart">
             <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex justify-center items-center hover:bg-black/[0.05] cursor-pointer relative">
               <BsCart className="text-[15px] md:text-[20px]" />
-              <div className="h-[14px] md:h-[18px] min-w-[14px] md:min-w-[18px] rounded-full bg-indigo-500 absolute top-1 left-5 md:left-7 text-white text-[10px] md:text-[12px] flex justify-center items-center px-[2px] md:px-[5px]">
-              2
-              </div>
+              {cartItems !== 0 && (
+                <div className="h-[14px] md:h-[18px] min-w-[14px] md:min-w-[18px] rounded-full bg-indigo-500 absolute top-1 left-5 md:left-7 text-white text-[10px] md:text-[12px] flex justify-center items-center px-[2px] md:px-[5px]">
+                  {cartItems}
+                </div>
+              )}
             </div>
           </Link>
 

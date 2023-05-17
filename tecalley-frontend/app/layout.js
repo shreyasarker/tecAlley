@@ -1,6 +1,7 @@
 import { Urbanist } from 'next/font/google';
 import './globals.css';
 import { Footer, Header } from '@/components';
+import Providers from '@/store/Providers';
 
 const urbanist = Urbanist({
   subsets: ['latin'],
@@ -17,9 +18,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={urbanist.className} suppressHydrationWarning={true}>
-        <Header />
-        {children}
-        <Footer />
+        <Providers>
+          <Header />
+            {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   )
