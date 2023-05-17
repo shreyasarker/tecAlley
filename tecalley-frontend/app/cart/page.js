@@ -11,7 +11,7 @@ const Cart = () => {
 
   const subTotal = useMemo(() => {
     return cartItems.reduce((total, value) => total + value.attributes.price, 0)
-  }, []);
+  }, [cartItems]);
 
   return (
     <div className="w-full md:py-20">
