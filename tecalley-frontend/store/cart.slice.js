@@ -25,8 +25,8 @@ export const cartSlice = createSlice({
         return item;
       });
     },
-    removeFromCart: () => {
-
+    removeFromCart: (state, action) => {
+      state.cartItems = state.cartItems.filter((item) => item.id !== action.payload.id);
     } 
   }
 });

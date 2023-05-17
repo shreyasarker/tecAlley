@@ -1,7 +1,7 @@
 'use client';
 
 import { store } from '@/store';
-import { updateCart } from '@/store/cart.slice';
+import { removeFromCart, updateCart } from '@/store/cart.slice';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 
 const CartItem = ({ cartItem }) => {
@@ -53,7 +53,7 @@ const CartItem = ({ cartItem }) => {
 
           </div>
 
-          <RiDeleteBin6Line className="cursor-pointer text-black/[0.5] hover:text-black text-[16px] md:text-[20px]" />
+          <RiDeleteBin6Line onClick={() => {store.dispatch(removeFromCart({id: cartItem.id}))}} className="cursor-pointer text-black/[0.5] hover:text-black text-[16px] md:text-[20px]" />
 
         </div>
       </div>
