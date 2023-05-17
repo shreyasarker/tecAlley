@@ -1,5 +1,6 @@
 'use client';
 
+import { useMemo } from 'react';
 import { CartItem, Wrapper } from '@/components';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -7,6 +8,10 @@ import { useSelector } from 'react-redux';
 
 const Cart = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);
+
+  const subTotal = useMemo(() => {
+    return cartItems.reduce((total, value) => total + value.attributes.price, 0)
+  }, []);
 
   return (
     <div className="w-full md:py-20">
@@ -32,7 +37,7 @@ const Cart = () => {
                 <div className="p-5 my-5 bg-black/[0.05] rounded-xl">
                   <div className="flex justify-between">
                     <div className="uppercase text-md md:text-lg font-medium text-black">Subtotal</div>
-                    <div className="text-md md:text-lg font-medium text-black">$ 1439.99</div>
+                    <div className="text-md md:text-lg font-medium text-black">$ {subTotal }</div>
                   </div>
                   <div className="text-sm md:text-md py-5 border-t mt-5">
                     The subtotal reflects the total price of
