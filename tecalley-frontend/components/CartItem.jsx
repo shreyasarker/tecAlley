@@ -1,6 +1,18 @@
+'use client';
+
+import { store } from '@/store';
+import { updateCart } from '@/store/cart.slice';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 
 const CartItem = ({ cartItem }) => {
+  const updateCartItem = (quantity) => {
+    const item = {
+      id: cartItem.id,
+      quantity: parseInt(quantity)
+    }
+    store.dispatch(updateCart(item));
+  };
+
   return (
     <div className="flex py-5 gap-3 md:gap-5 border-b">
       <div className="shrink-0 aspect-square w-[50px] md:w-[120px]">
@@ -32,7 +44,7 @@ const CartItem = ({ cartItem }) => {
 
             <div className="flex items-center gap-1">
               <div className="font-semibold">Quantity:</div>
-              <select className="hover:text-black" defaultValue={cartItem.quantity}>
+              <select className="hover:text-black" defaultValue={cartItem.quantity} onChange={(e) => updateCartItem(e.target.value)}>
                 {Array.from({length: 10}, (_, i) => (
                   <option value={i + 1} key={i + 1}>{i + 1}</option>
                 ))}

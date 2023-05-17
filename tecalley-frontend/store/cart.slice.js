@@ -16,8 +16,14 @@ export const cartSlice = createSlice({
         state.cartItems.push({...action.payload, quantity: 1});
       }
     },
-    updateCart: () => {
-
+    updateCart: (state, action) => {
+      state.cartItems.map((item) => {
+        if(item.id === action.payload.id) {
+          item.attributes.price = item.price * action.payload.quantity;
+          item.quantity = action.payload.quantity;
+        }
+        return item;
+      });
     },
     removeFromCart: () => {
 
