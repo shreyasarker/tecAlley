@@ -1,15 +1,17 @@
+import { getDiscountPercentage } from '@/utils/helpers';
+import Image from 'next/image';
 import Link from 'next/link';
 
-const ProductCard = () => {
+const ProductCard = ({ product }) => {
   return (
-    <Link href="/product/samsung-s23-ultra" className="transform overflow-hidden bg-white duration-200 hover:scale-105 cursor-pointer">
-      <img className="w-full" src="/assets/products/samsung-s23-ultra/S23U-V2-Configurator-DT-800x600.webp" alt="Product" />
+    <Link href={`/product/${product.attributes.slug}`} className="transform overflow-hidden bg-white duration-200 hover:scale-105 cursor-pointer">
+      <img src={product.attributes.thumbnail.data.attributes.url} alt={product.attributes.name} className="w-[300px] h-[300px]" />
       <div className="p-4 text-black/[0.9]">
-        <h2 className="text-lg font-medium">Samsung S23 Ultra</h2>
+        <h2 className="text-lg font-medium">{product.attributes.name}</h2>
         <div className="flex items-center text-black/[0.5]">
-          <p className="mr-2 text-lg font-semibold">$1151.99</p>
-          <p className="text-base font-medium line-through">$288</p>
-          <p className="ml-auto text-base font-medium text-green-500">20% off</p>
+          <p className="mr-2 text-lg font-semibold">${product.attributes.price}</p>
+          {product.attributes.original_price && <p className="text-base font-medium line-through">${product.attributes.original_price}</p>}
+          <p className="ml-auto text-base font-medium text-green-500">{getDiscountPercentage(product.attributes.price, product.attributes.original_price)}% off</p>
         </div>
       </div>
     </Link>

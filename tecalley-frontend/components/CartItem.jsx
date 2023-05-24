@@ -1,30 +1,42 @@
+'use client';
+
+import { store } from '@/store';
+import { removeFromCart, updateCart } from '@/store/cart.slice';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 
-const CartItem = () => {
+const CartItem = ({ cartItem }) => {
+  const updateCartItem = (quantity) => {
+    const item = {
+      id: cartItem.id,
+      quantity: parseInt(quantity)
+    }
+    store.dispatch(updateCart(item));
+  };
+
   return (
     <div className="flex py-5 gap-3 md:gap-5 border-b">
       <div className="shrink-0 aspect-square w-[50px] md:w-[120px]">
-        <img src="/assets/products/samsung-s23-ultra/S23U-V2-Configurator-DT-800x600.webp" alt="Product" />
+        <img src={cartItem.attributes.thumbnail.data.attributes.url} alt={cartItem.attributes.name} className="w-[120px] h-[120px]" />
       </div>
 
       <div className="w-full flex flex-col">
         <div className="flex flex-col md:flex-row justify-between">
           <div className="text-lg md:text-2xl font-semibold text-black/[0.8]">
-            Samsung S23 Ultra
+            {cartItem.attributes.name}
           </div>
 
           <div className="text-sm md:text-md font-medium text-black/[0.5] block md:hidden">
-            128 GB | 256 GB | 1 TB
+            {cartItem.attributes.subtitle}
           </div>
 
           <div className="text-sm md:text-md font-bold text-black/[0.5] mt-2">
-            Price: $1439.99
+            Price: ${cartItem.attributes.price}
           </div>
 
         </div>
 
         <div className="text-md font-medium text-black/[0.5] hidden md:block">
-          128 GB | 256 GB | 1 TB
+          {cartItem.attributes.subtitle}
         </div>
 
         <div className="flex items-center justify-between mt-4">
@@ -32,23 +44,16 @@ const CartItem = () => {
 
             <div className="flex items-center gap-1">
               <div className="font-semibold">Quantity:</div>
-              <select className="hover:text-black">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
+              <select className="hover:text-black" defaultValue={cartItem.quantity} onChange={(e) => updateCartItem(e.target.value)}>
+                {Array.from({length: 10}, (_, i) => (
+                  <option value={i + 1} key={i + 1}>{i + 1}</option>
+                ))}
               </select>
             </div>
 
           </div>
 
-          <RiDeleteBin6Line className="cursor-pointer text-black/[0.5] hover:text-black text-[16px] md:text-[20px]" />
+          <RiDeleteBin6Line onClick={() => {store.dispatch(removeFromCart({id: cartItem.id}))}} className="cursor-pointer text-black/[0.5] hover:text-black text-[16px] md:text-[20px]" />
 
         </div>
       </div>

@@ -1,25 +1,51 @@
 import { IoMdHeartEmpty } from 'react-icons/io';
 
-import { ProductCarousel, RelatedProducts, Wrapper } from '@/components';
+import { CartButton, ProductCarousel, RelatedProducts, Wrapper } from '@/components';
+import { fetchDataFromApi } from '@/utils/api';
+import { getDiscountPercentage } from '@/utils/helpers';
+import ReactMarkdown from 'react-markdown';
 
-const Product = ({ params }) => {
+
+const Product = async ({ params: { slug } }) => {
+  const products = await fetchDataFromApi(`/products?populate=*&filters[slug][$eq]=${slug}`);
+  const relatedProducts = await fetchDataFromApi(`/products?populate=*&filters[slug][$ne]=${slug}`);
+  const product = products?.data[0];
+
   return (
     <div className="w-full md:py-20">
       <Wrapper>
         <div className="flex flex-col lg:flex-row md:px-10 gap-[50px] lg:gap-[100px]">
           <div className="w-full md:w-auto flex-[1.5] max-w-[500px] lg:max-w-full mx-auto lg:mx-0">
-            <ProductCarousel />
+            <ProductCarousel productThumbnail={product?.attributes?.thumbnail} productImages={product?.attributes?.image} />
           </div>
           
           <div className="flex-[1] py-3">
             <div className="text-[34px] font-semibold mb-2">
-              Samsung S23 Ultra
+              {product.attributes.name}
             </div>
             <div className="text-lg font-semibold mb-5">
-              128GB / 256GB / 1TB Variant
+              {product.attributes.subtitle}
             </div>
             <div className="text-lg font-semibold">
-              Price: $ 1439.99
+              <div className="flex items-center">
+                <p className="mr-2 text-lg font-semibold">
+                  Price : ${product.attributes.price}
+                </p>
+                {product.attributes.original_price && (
+                  <>
+                    <p className="text-base  font-medium line-through">
+                      ${product.attributes.original_price}
+                    </p>
+                    <p className="ml-auto text-base font-medium text-green-500">
+                      {getDiscountPercentage(
+                        product.attributes.price,
+                        product.attributes.original_price
+                      )}
+                      % off
+                    </p>
+                  </>
+                  )}
+              </div>
             </div>
             <div className="text-md font-medium text-black/[0.5]">
               incl. of taxes
@@ -28,27 +54,24 @@ const Product = ({ params }) => {
               {`(Also includes all applicable duties)`}
             </div>
 
-            <button className="w-full py-4 rounded-full bg-indigo-500 text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75">
-              Add to Cart
-            </button>
+            <CartButton product={product} />
 
-            <button className="w-full py-4 rounded-full border border-black text-lg font-medium transition-transform active:scale-95 flex items-center justify-center gap-2 hover:opacity-75 mb-10">
+            <button type="button" className="w-full py-4 rounded-full border border-black text-lg font-medium transition-transform active:scale-95 flex items-center justify-center gap-2 hover:opacity-75 mb-10">
               Wishlist <IoMdHeartEmpty />
             </button>
 
             <div>
               <div className="text-lg font-bold mb-5">Product Details</div>
-              <div className="text-md mb-5">
-                It includes a large high-resolution display, a powerful processor, an advanced camera system with multiple lenses and improved low-light performance, 5G connectivity, a large battery with fast charging, enhanced security with an in-display fingerprint scanner and facial recognition, and a sleek and elegant design with slim bezels. 
-              </div>
-              <div className="text-md mb-5">
-                It includes a large high-resolution display, a powerful processor, an advanced camera system with multiple lenses and improved low-light performance, 5G connectivity, a large battery with fast charging, enhanced security with an in-display fingerprint scanner and facial recognition, and a sleek and elegant design with slim bezels. 
+              <div className="markdown text-md mb-5">
+                <ReactMarkdown>
+                  {product.attributes.description}
+                </ReactMarkdown>
               </div>
             </div>
 
           </div>
         </div>
-        <RelatedProducts />
+        <RelatedProducts products={relatedProducts} />
       </Wrapper>
     </div>
   )
